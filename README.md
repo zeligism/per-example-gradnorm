@@ -7,10 +7,7 @@ but I think it can be extended to convolution layers in a straightforward manner
 ## Inspiration
 
 Let's say we have a mini-batch loss
-$
-    \ell_{\mathcal{B}}(w)
-    := \frac{1}{|\mathcal{B}|} \sum_{i \in \mathcal{B}} \ell_i(w),
-$
+$\ell_{\mathcal{B}}(w) := \frac{1}{|\mathcal{B}|} \sum_{i \in \mathcal{B}} \ell_i(w),$
 where $\mathcal{B}$ is mini-batch (of indices).
 In PyTorch, when we do a backward pass on $\ell_{\mathcal{B}}(w)$,
 we store the gradient $\nabla \ell_{\mathcal{B}}(w)$ and not the **per-example** gradients $\nabla \ell_i(w)$.
@@ -21,8 +18,8 @@ For example, one outlier loss in our dataset is enough to increase the gradient 
 Keeping the gradient norms (instead of the whole gradients) in memory is gonna cost us only $|\mathcal{B}_t|$ numbers, so why not store them somewhere, right?
 For example, if we know that the norm with respect to one example is 0,
 then we know that our solution is optimal on that example.
-Another general case is when we want to take an inner product of two set of gradients on the same mini-batch $\mathcal{B}$: one calculated at model $w_1$ and another at model $w_2$. Namely,
-$ \nabla \ell_i(w_1) \cdot \nabla \ell_j(w_2)$
+Another general case is when we want to take an inner product of a set of gradients on the same mini-batch $\mathcal{B}$. Namely,
+$\langle \nabla \ell_i(w), \nabla \ell_j(w) \rangle$
 where $i,j \in \mathcal{B}$.
 We can also do that efficiently because we have everything we need right there in autograd.
 
