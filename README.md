@@ -1,8 +1,7 @@
 # Per-Example gradient norm and inner product
 
-A short notebook showing a nice technique in PyTorch that allows us to efficiently calculate per-example gradient norms and inner products.
-This implementation applies to Linear layers only,
-but I think it can be extended to convolution layers in a straightforward manner.
+This repo contains a short notebook showing a nice technique in PyTorch that allows us to efficiently calculate per-example gradient norms and inner products.
+It applies to Linear layers only, but I think it can be extended to convolution layers in a straightforward manner.
 
 ## Inspiration
 
