@@ -7,10 +7,10 @@ but I think it can be extended to convolution layers in a straightforward manner
 ## Inspiration
 
 Let's say we have a mini-batch loss
-$$
+$
     \ell_{\mathcal{B}}(w)
     := \frac{1}{|\mathcal{B}|} \sum_{i \in \mathcal{B}} \ell_i(w),
-$$
+$
 where $\mathcal{B}$ is mini-batch (of indices).
 In PyTorch, when we do a backward pass on $\ell_{\mathcal{B}}(w)$,
 we store the gradient $\nabla \ell_{\mathcal{B}}(w)$ and not the **per-example** gradients $\nabla \ell_i(w)$.
@@ -22,9 +22,9 @@ Keeping the gradient norms (instead of the whole gradients) in memory is gonna c
 For example, if we know that the norm with respect to one example is 0,
 then we know that our solution is optimal on that example.
 Another general case is when we want to take an inner product of two set of gradients on the same mini-batch $\mathcal{B}$: one calculated at model $w_1$ and another at model $w_2$. Namely,
-$$
+$
     \langle \nabla \ell_i(w_1), \nabla \ell_j(w_2) \rangle, \quad i,j \in \mathcal{B}.
-$$
+$
 We can also do that efficiently because we have everything we need right there in autograd.
 
 ## How?
